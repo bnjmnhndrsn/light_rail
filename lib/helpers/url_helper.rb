@@ -5,25 +5,25 @@ module UrlHelper
     sing = plural.to_s.singularize
     hash = {
       index: { 
-        name: "#{plural}_url", method: :get, pattern: /^\/#{plural}$/, string: "#{plural}"
+        name: "#{plural}_url", method: :get, pattern: /^\/#{plural}$/, string: "/#{plural}"
       },
       show: { 
-        name: "#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<?>"
+        name: "#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "/#{plural}/<?>"
       },
       create: {
-         name: "#{plural}_url", method: :post, pattern: /^\/#{plural}$/, string: "#{plural}" 
+         name: "#{plural}_url", method: :post, pattern: /^\/#{plural}$/, string: "/#{plural}" 
       },
       edit: { 
-        name: "edit_#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)\/edit$/, string: "#{plural}/<?>/edit"
+        name: "edit_#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)\/edit$/, string: "/#{plural}/<?>/edit"
       },
       update: { 
-        name: "#{sing}_url", method: :put, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<?>"
+        name: "#{sing}_url", method: :put, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "/#{plural}/<?>"
       },
       destroy: { 
-        name: "#{sing}_url", method: :delete, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<?>" 
+        name: "#{sing}_url", method: :delete, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "/#{plural}/<?>" 
       },
       new: { 
-        name: "new_#{sing}_url", method: :get, pattern: /^\/#{plural}\/new$/, string: "#{plural}/new" 
+        name: "new_#{sing}_url", method: :get, pattern: /^\/#{plural}\/new$/, string: "/#{plural}/new" 
       }
     }
   

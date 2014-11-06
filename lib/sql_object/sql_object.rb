@@ -46,6 +46,7 @@ class SQLObject
       #{table_name}
     SQL
    results = DBConnection.execute(query)
+   p results
    self.parse_all(results)
   end
 
@@ -64,8 +65,8 @@ class SQLObject
     WHERE
       #{table_name}.id = ? 
     SQL
-   result = DBConnection.execute(query, id).first
-   p self.new(result)
+   result = DBConnection.execute(query, id.to_i).first
+   result ? Cat.new(result) : nil 
   end
 
   def initialize(params = {})

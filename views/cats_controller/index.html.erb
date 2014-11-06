@@ -1,3 +1,8 @@
 <h1>ALL THE CATS</h1>
 <h3><a href="<%= new_cat_url %>">New cat!</a></h3>
 <h3><a href="<%= cat_url(1) %>">A cat!</a></h3>
+<ul>
+	<% @cats.each do |cat| %>
+		<li><%= cat.name %></li>
+	<% end %>
+</ul>
