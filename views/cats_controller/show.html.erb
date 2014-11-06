@@ -1,4 +1,4 @@
-<div><%= flash[:alert] %></div>
+<div><%= flash[:alert] if flash[:alert] %></div>
 <h1>A cat!</h1>
 <h3><a href="<%= new_cat_url %>">New cat!</a></h3>
 <h3><a href="<%= cats_url %>">Cats index!</a></h3>

@@ -6,6 +6,7 @@ require 'erb'
 #PRIME
 class ControllerBase
   include UrlHelper
+  
   attr_reader :req, :res, :params
 
   # Setup the controller
