@@ -1,1 +1,1 @@
-Light Rail is a simple web app framework, based on Ruby on Rails. It is based on work I've done while at App Academy.
+Light Rail is a simple web app framework, based on Ruby on Rails. It is adapted from work I've done while at App Academy.

@@ -1,5 +1,6 @@
 require 'json'
 require 'webrick'
+require 'byebug'
 
 class CookieLite
   def initialize(req, name)
@@ -8,11 +9,11 @@ class CookieLite
   end
 
   def [](key)
-    @cookie[key]
+    @cookie[key.to_s]
   end
 
   def []=(key, val)
-    @cookie[key] = val
+    @cookie[key.to_s] = val
   end
 
   # serialize the hash into json and save in a cookie
@@ -23,7 +24,7 @@ class CookieLite
 end
 
 class Session < CookieLite
-  NAME = '_rails_lite_app'
+  NAME = '_light_rail_app'
   
   def initialize(req)  
     super(req, NAME)
@@ -37,15 +38,15 @@ class Session < CookieLite
 end
 
 class Flash < CookieLite
-  NAME = '_rails_lite_app_flash'
+  NAME = '_light_rail_flash'
   
   def initialize(req)  
     super(req, NAME)
-    @cookie[:_next] = {}
+    @cookie["_next"] = {} if @cookie["_next"].nil?
   end
       
   def store_flash(res)
-    @cookie = @cookie[:_next]
+    @cookie = @cookie["_next"]
     store(res, NAME)
   end
   
@@ -54,7 +55,7 @@ class Flash < CookieLite
   end
   
   def []=(key, val)
-    @cookie[:_next][key] = val
+    @cookie["_next"][key.to_s] = val
   end
   
   def now

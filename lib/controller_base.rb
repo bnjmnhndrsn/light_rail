@@ -25,11 +25,11 @@ class ControllerBase
   # Set the response status code and header
   def redirect_to(url)
     raise "already built response" if already_built_response?
-    self.session.store_session(@res)
-    self.flash.store_flash(@res)
     @res.status = 302
     @res["Location"] = url
     @already_built_response = true
+    self.session.store_session(@res)
+    self.flash.store_flash(@res)
   end
 
   # Populate the response with content.
@@ -38,7 +38,7 @@ class ControllerBase
   def render_content(content, type)
     raise "already built response" if already_built_response?
     self.session.store_session(@res)
-    self.flash.store_flash_now(@res)
+    self.flash.store_flash(@res)
     @res.content_type = type
     @res.body = content
     @already_built_response = true

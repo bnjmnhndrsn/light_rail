@@ -8,19 +8,19 @@ module UrlHelper
         name: "#{plural}_url", method: :get, pattern: /^\/#{plural}$/, string: "#{plural}"
       },
       show: { 
-        name: "#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<id>"
+        name: "#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<?>"
       },
       create: {
          name: "#{plural}_url", method: :post, pattern: /^\/#{plural}$/, string: "#{plural}" 
       },
       edit: { 
-        name: "edit_#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)\/edit$/, string: "#{plural}/<id>/edit"
+        name: "edit_#{sing}_url", method: :get, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)\/edit$/, string: "#{plural}/<?>/edit"
       },
       update: { 
-        name: "#{sing}_url", method: :put, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<id>"
+        name: "#{sing}_url", method: :put, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<?>"
       },
       destroy: { 
-        name: "#{sing}_url", method: :delete, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<id>" 
+        name: "#{sing}_url", method: :delete, pattern: /^\/#{plural}\/(?<#{sing}_id>\d+)$/, string: "#{plural}/<?>" 
       },
       new: { 
         name: "new_#{sing}_url", method: :get, pattern: /^\/#{plural}\/new$/, string: "#{plural}/new" 
@@ -33,8 +33,8 @@ module UrlHelper
     
   def include_helpers
     @@routes.each do |route_hash|
-      self.class.send(:define_method, route_hash[:name]) do |id|
-        route_hash[:string].gsub("<id>", id.to_s)
+      self.class.send(:define_method, route_hash[:name]) do |*args|
+          args.empty? ? route_hash[:string] : route_hash[:string].gsub("<?>", args.first.to_s)
       end
     end
   end

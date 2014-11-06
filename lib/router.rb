@@ -22,6 +22,8 @@ class Route
     controller = @controller_class.new(req, res, route_params)
     controller.invoke_action(@action_name)
   end
+  
+  
 end
 
 class Router
@@ -46,6 +48,7 @@ class Router
   def resources(name, actions)
     actions.each do |action|
       hash = UrlHelper::get_url_hash(action, name)
+      open_controller(name.to_s)
       self.send(hash[:method], hash[:pattern], "#{name.to_s.capitalize}Controller".constantize, action)
     end
   end
@@ -74,6 +77,11 @@ class Router
     else
       res.status = 404
     end
+  end
+  
+  # opens controller file so it can be instantiated later
+  def open_controller(name)
+    require_relative "../controllers/#{name.pluralize.downcase}_controller"
   end
   
   
